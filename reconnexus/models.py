@@ -1,6 +1,6 @@
 from typing import List, Dict, Optional, Any
 from pydantic import BaseModel, Field
-from datetime import datetime
+from datetime import datetime, timezone
 
 class OpenPort(BaseModel):
     port: int
@@ -30,4 +30,4 @@ class ReconAsset(BaseModel):
     tls_certificate: Optional[CertificateInfo] = None
     security_headers: Optional[SecurityHeaders] = None
     server_technologies: List[str] = Field(default_factory=list)
-    scanned_at: str = Field(default_factory=lambda: datetime.utcnow().isoformat())
+    scanned_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
